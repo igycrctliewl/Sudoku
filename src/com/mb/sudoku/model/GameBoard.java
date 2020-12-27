@@ -3,7 +3,12 @@ package com.mb.sudoku.model;
 public class GameBoard {
 
 	private Cell[][] gridBoard;
-	
+	private Cell[][] rows;
+	private Cell[][] columns;
+	private Cell[][] sectors;
+	private Cell[][] diags;
+
+
 	public GameBoard() {
 		gridBoard = new Cell[9][9];
 		for( int row = 0; row < 9; row++ ) {
@@ -13,16 +18,24 @@ public class GameBoard {
 		}
 	}
 	
+	public boolean addBoardRow( int rowNum, Cell[] cells ) {
+		this.gridBoard[rowNum] = cells;
+		return true;
+	}
+
+	/**
+	 * Call this method after building the gridBoard.  This will initialize
+	 * all the rows, columns, and sectors for the puzzle.
+	 */
+	public void initialize() {
+		this.rows = this.gridBoard;
+		this.columns = null;
+		this.sectors = null;
+		this.diags = null;
+	}
+
 	public Group getRow( int rowNum ) {
-		Group row = new Group( gridBoard[rowNum][0], 
-				gridBoard[rowNum][1], 
-				gridBoard[rowNum][2], 
-				gridBoard[rowNum][3], 
-				gridBoard[rowNum][4], 
-				gridBoard[rowNum][5], 
-				gridBoard[rowNum][6], 
-				gridBoard[rowNum][7], 
-				gridBoard[rowNum][8] );
+		Group row = new Group( this.rows[rowNum] );
 		return row;
 	}
 	
@@ -33,7 +46,19 @@ public class GameBoard {
 	public Group getSector( int secNum ) {
 		return null;
 	}
-	
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for( Cell[] row : rows ) {
+			for( Cell cell : row ) {
+				sb.append( cell.getSolvedValue() );
+			}
+			sb.append( System.lineSeparator() );
+		}
+		return sb.toString();
+	}
+
+
 	public static void main( String[] args ) {
 		GameBoard gb = new GameBoard();
 		System.out.println( gb );

@@ -12,16 +12,21 @@ import java.util.Set;
  *
  */
 public class Cell {
+	private static final Character[] ALL_CHARS = {'1','2','3','4','5','6','7','8','9'};
 
-	private boolean solved;
 	private Set<Character> values;
-	private char solvedValue;
+	private Character solvedValue;
 	
 	/**
 	 * This constructor creates a solved Cell with the provided value
 	 */
-	public Cell( char value ) {
-		this.setSolvedValue( value );
+	public Cell( Character value ) {
+		this();
+		if( value.equals('.') ) {
+			// do nothing
+		} else {
+			this.setSolvedValue( value );
+		}
 	}
 	
 	
@@ -29,9 +34,8 @@ public class Cell {
 	 * The no-argument constructor creates a new unsolved Cell with all possible values.
 	 */
 	public Cell() {
-		this.setSolved( false );
 		this.values = new HashSet<Character>( Arrays.asList( ALL_CHARS ) );
-		this.solvedValue = '.';
+		this.solvedValue = null;
 	}
 	
 	/**
@@ -40,41 +44,42 @@ public class Cell {
 	 * @param remove the value to remove
 	 * @return true if a value was removed, false if nothing was removed or this Cell is already solved
 	 */
-	public boolean removeValue( char remove ) {
+	public boolean removeValue( Character remove ) {
 		if( this.isSolved() ) {
 			return false;
 		} else {
 			return this.values.remove( remove );			
 		}
 	}
-	
+
+
+	public Character getSolvedValue() {
+		if( this.solvedValue == null ) {
+			return '.';
+		} else {
+			return this.solvedValue;
+		}
+	}
+
 	/**
 	 * Set the solved value for this Cell and also set the solved flag to true.
 	 * @param solvedValue the solved value for this Cell
 	 */
-	public void setSolvedValue( char solvedValue ) {
+	protected void setSolvedValue( Character solvedValue ) {
 		// TODO: this feels like it should not be a public method
 		// perhaps the solved value should only be set when there is 
 		// a single value remaining in this.values
 		this.values = null;
 		this.solvedValue = solvedValue;
-		this.setSolved( true );
 	}
 	
-	/**
-	 * Set the value for the solved flag for this Cell
-	 * @param solved
-	 */
-	public void setSolved( boolean solved ) {
-		this.solved = solved;
-	}
 	
 	/**
 	 * Return the value for the solved flag for this Cell
 	 * @return true if the Cell has been solved, otherwise false
 	 */
 	public boolean isSolved() {
-		return solved;
+		return ! ( solvedValue == null );
 	}
 	
 	/**
@@ -82,17 +87,23 @@ public class Cell {
 	 * solved value or a period "." representing an unsolved value.
 	 */
 	public String toString() {
-		return Character.toString( this.solvedValue );
+		if( this.isSolved() ) {
+			return "solved: " + this.solvedValue.toString();
+		} else {
+			return "possibly " + values.toString();
+		}
 	}
 	
 	
-	private static final Character[] ALL_CHARS = {'1','2','3','4','5','6','7','8','9'};
 	
 	public static void main(String[] args) {
 		System.out.println( "Cell.main()" );
 		Cell c = new Cell();
 		System.out.println( c.removeValue( '3' ) );
 		System.out.println( c );
+
+		Cell b = new Cell( '5' );
+		System.out.println( b );
 	}
 
 }
