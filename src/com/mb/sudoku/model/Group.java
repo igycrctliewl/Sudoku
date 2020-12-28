@@ -26,4 +26,13 @@ public class Group {
 		cells[8] = c8;
 	}
 
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for( Cell cell : this.cells ) {
+			sb.append( cell.getSolvedValue() );
+		}
+		return sb.toString();
+	}
+
 }
