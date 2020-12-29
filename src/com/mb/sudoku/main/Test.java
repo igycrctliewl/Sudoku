@@ -9,6 +9,7 @@ public class Test {
 	public static void main( String[] args) {
 		String testData = "7....234.....9..5.2...6.....29.....7...2.3...1.....68.....1...3.6..3.....754....9";
 		GameBoard board = new GameBoard();
+		board.setSudokuXPuzzle( true );
 
 		int j = 0;
 		for( int i = 0; i < 9; i++ ) {
@@ -27,6 +28,10 @@ public class Test {
 
 		Group g = board.getDiagonal( 1 );
 		System.out.println( g );
+
+		for( Cell c : g.getCells() ) {
+			System.out.println( c );
+		}
 
 	}
 

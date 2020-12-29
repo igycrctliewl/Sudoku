@@ -1,5 +1,8 @@
 package com.mb.sudoku.model;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Group is the superclass for Row Column and Sector
  * @author mikebro
@@ -8,7 +11,10 @@ package com.mb.sudoku.model;
 public class Group {
 
 	private Cell[] cells;
-	
+	public List<Cell> getCells() {
+		return Arrays.asList( cells );
+	}
+
 	public Group( Cell[] cells ) {
 		this.cells = cells;
 	}

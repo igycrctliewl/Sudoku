@@ -12,7 +12,9 @@ public class GameBoard {
 	private boolean sudokuXPuzzle;
 	private List<Group> diags;
 	private List<Group> groups;
-
+	public List<Group> getGroups() {
+		return this.groups;
+	}
 
 	public GameBoard() {
 		gridBoard = new Cell[9][9];
@@ -33,6 +35,7 @@ public class GameBoard {
 	 * all the rows, columns, and sectors for the puzzle.
 	 */
 	public void initialize() {
+		// TODO: Consider whether this method should detect and populate any missing cells in the game board
 		this.rows = new ArrayList<>();
 		populateRows();
 		this.columns = new ArrayList<>();

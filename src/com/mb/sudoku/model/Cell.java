@@ -41,6 +41,7 @@ public class Cell {
 	/**
 	 * Eliminate a value from the list of possible values for this Cell.
 	 * If the Cell has already been solved, always return false.
+	 * If after removing a value the Cell is solved, call setSolvedValue
 	 * @param remove the value to remove
 	 * @return true if a value was removed, false if nothing was removed or this Cell is already solved
 	 */
@@ -48,7 +49,8 @@ public class Cell {
 		if( this.isSolved() ) {
 			return false;
 		} else {
-			return this.values.remove( remove );			
+			// TODO: if the Cell has been solved, call the method to mark the Cell "solved"
+			return this.values.remove( remove );
 		}
 	}
 
@@ -65,10 +67,7 @@ public class Cell {
 	 * Set the solved value for this Cell and also set the solved flag to true.
 	 * @param solvedValue the solved value for this Cell
 	 */
-	protected void setSolvedValue( Character solvedValue ) {
-		// TODO: this feels like it should not be a public method
-		// perhaps the solved value should only be set when there is 
-		// a single value remaining in this.values
+	private void setSolvedValue( Character solvedValue ) {
 		this.values = null;
 		this.solvedValue = solvedValue;
 	}
