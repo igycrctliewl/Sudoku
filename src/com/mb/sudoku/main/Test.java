@@ -2,6 +2,7 @@ package com.mb.sudoku.main;
 
 import com.mb.sudoku.model.Cell;
 import com.mb.sudoku.model.GameBoard;
+import com.mb.sudoku.model.Group;
 
 
 public class Test {
@@ -22,8 +23,10 @@ public class Test {
 		}
 
 		board.initialize();
-		System.out.println( board );
+		// System.out.println( board );
 
+		Group g = board.getDiagonal( 1 );
+		System.out.println( g );
 
 	}
 

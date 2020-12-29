@@ -11,6 +11,7 @@ public class GameBoard {
 	private List<Group> sectors;
 	private boolean sudokuXPuzzle;
 	private List<Group> diags;
+	private List<Group> groups;
 
 
 	public GameBoard() {
@@ -42,6 +43,12 @@ public class GameBoard {
 		if( this.isSudokuXPuzzle() ) {
 			populateDiagonals();
 		}
+
+		this.groups = new ArrayList<>();
+		groups.addAll( rows );
+		groups.addAll( columns );
+		groups.addAll( sectors );
+		groups.addAll( diags );
 	}
 
 	private void populateRows() {
@@ -51,13 +58,20 @@ public class GameBoard {
 		}
 	}
 	private void populateColumns() {
-		
+		for( int i = 0; i < 9; i++ ) {
+			Group col = getColumn( i );
+			this.columns.add( col );
+		}
 	}
 	private void populateSectors() {
-		
+		for( int i = 0; i < 9; i++ ) {
+			Group sect = getSector( i );
+			this.sectors.add( sect );
+		}
 	}
 	private void populateDiagonals() {
-		
+		this.diags.add( this.getDiagonal(0) );
+		this.diags.add( this.getDiagonal(1) );
 	}
 
 
@@ -75,7 +89,20 @@ public class GameBoard {
 	}
 
 	public Group getSector( int secNum ) {
-		return null;
+		Cell[] cells = new Cell[9];
+		int sectorRow = ( secNum / 3 );
+		int sectorCol = ( secNum % 3 );
+		int baseRow = sectorRow * 3;
+		int baseCol = sectorCol * 3;
+		int i = 0;
+
+		for( int j = 0; j < 3; j++ ) {
+			for( int k = 0; k < 3; k++ ) {
+				Cell c = this.gridBoard[ baseRow + j ][ baseCol + k ];
+				cells[i++] = c;
+			}
+		}
+		return new Group( cells );
 	}
 
 	/**
@@ -85,12 +112,25 @@ public class GameBoard {
 	 * @return Group representing one of the diagonal lines
 	 */
 	public Group getDiagonal( int xNum ) {
-		if( this.isSudokuXPuzzle() ) {
-			//calculate the diagonal
-			return null;
+		int startRow;
+		int startCol;
+		int step;
+
+		if( xNum == 0 ) {
+			startRow = 0;
+			startCol = 0;
+			step = +1;
 		} else {
-			return null;
+			startRow = 8;
+			startCol = 0;
+			step = -1;
 		}
+
+		Cell[] cells = new Cell[9];
+		for( int row = startRow, col = startCol; col < 9; row += step, col++ ) {
+			cells[ col ] = this.gridBoard[ row ][ col ];
+		}
+		return new Group( cells );
 	}
 
 	public void setSudokuXPuzzle( boolean newValue ) {
@@ -105,7 +145,7 @@ public class GameBoard {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		for( Group row : rows ) {
-			sb.append( row.toString() );
+			sb.append( row.toString() ).append( System.lineSeparator() );
 		}
 		return sb.toString();
 	}
