@@ -1,8 +1,8 @@
 package com.mb.sudoku.model;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * The Cell class represents a single cell of the Sudoku game board.  Each row, column or sector of the
@@ -28,16 +28,21 @@ public class Cell {
 			this.setSolvedValue( value );
 		}
 	}
-	
-	
+
+
 	/**
 	 * The no-argument constructor creates a new unsolved Cell with all possible values.
 	 */
 	public Cell() {
-		this.values = new HashSet<Character>( Arrays.asList( ALL_CHARS ) );
+		this.values = new TreeSet<Character>( Arrays.asList( ALL_CHARS ) );
 		this.solvedValue = null;
 	}
-	
+
+
+	public boolean contains( Character ch ) {
+		return this.values.contains( ch );
+	}
+
 	/**
 	 * Eliminate a value from the list of possible values for this Cell.
 	 * If the Cell has already been solved, always return false.
@@ -49,8 +54,12 @@ public class Cell {
 		if( this.isSolved() ) {
 			return false;
 		} else {
-			// TODO: if the Cell has been solved, call the method to mark the Cell "solved"
-			return this.values.remove( remove );
+			boolean result = this.values.remove( remove );
+			// if the Cell has been solved, call the method to mark the Cell "solved"
+			if( this.values.size() == 1 ) {
+				this.setSolvedValue( (Character) ((TreeSet<?>) this.values).first() );
+			}
+			return result;
 		}
 	}
 
@@ -67,12 +76,12 @@ public class Cell {
 	 * Set the solved value for this Cell and also set the solved flag to true.
 	 * @param solvedValue the solved value for this Cell
 	 */
-	private void setSolvedValue( Character solvedValue ) {
+	public void setSolvedValue( Character solvedValue ) {
 		this.values = null;
 		this.solvedValue = solvedValue;
 	}
-	
-	
+
+
 	/**
 	 * Return the value for the solved flag for this Cell
 	 * @return true if the Cell has been solved, otherwise false
@@ -80,7 +89,7 @@ public class Cell {
 	public boolean isSolved() {
 		return ! ( solvedValue == null );
 	}
-	
+
 	/**
 	 * Present this Cell current solved value as a String.  This will either be the genuine
 	 * solved value or a period "." representing an unsolved value.
@@ -92,13 +101,20 @@ public class Cell {
 			return "possibly " + values.toString();
 		}
 	}
-	
-	
-	
+
+
+
 	public static void main(String[] args) {
 		System.out.println( "Cell.main()" );
 		Cell c = new Cell();
 		System.out.println( c.removeValue( '3' ) );
+		System.out.println( c.removeValue( '7' ) );
+		System.out.println( c.removeValue( '5' ) );
+		System.out.println( c.removeValue( '4' ) );
+		System.out.println( c.removeValue( '1' ) );
+		System.out.println( c.removeValue( '6' ) );
+		System.out.println( c.removeValue( '2' ) );
+		System.out.println( c.removeValue( '8' ) );
 		System.out.println( c );
 
 		Cell b = new Cell( '5' );

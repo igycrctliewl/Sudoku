@@ -1,5 +1,6 @@
 package com.mb.sudoku.main;
 
+import com.mb.sudoku.engine.Solver;
 import com.mb.sudoku.model.Cell;
 import com.mb.sudoku.model.GameBoard;
 import com.mb.sudoku.model.Group;
@@ -29,10 +30,15 @@ public class Test {
 		Group g = board.getDiagonal( 1 );
 		System.out.println( g );
 
-		for( Cell c : g.getCells() ) {
-			System.out.println( c );
+		boolean engineWorking = true;
+		while( engineWorking ) {
+			engineWorking = Solver.runSolverEngine( board.getGroups() );
 		}
 
+		g = board.getDiagonal( 1 );
+		System.out.println( g );
+
+		System.out.println( board );
 	}
 
 }
