@@ -4,7 +4,7 @@ import com.mb.sudoku.main.creator.GameCreator;
 import com.mb.sudoku.main.creator.GameCreatorFactory;
 import com.mb.sudoku.model.GameBoard;
 
-public class MainWithArgs {
+public class Sudoku {
 
 	public static void main( String[] args) {
 		GameSettings props = GameSettings.getProperties();
