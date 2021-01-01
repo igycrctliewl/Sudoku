@@ -1,19 +1,26 @@
 package com.mb.sudoku.main;
 
+import com.mb.sudoku.main.creator.GameCreator;
+import com.mb.sudoku.main.creator.GameCreatorFactory;
+import com.mb.sudoku.model.GameBoard;
+
 public class MainWithArgs {
+
 	public static void main( String[] args) {
+		GameSettings props = GameSettings.getProperties();
 		for( String s : args ) {
-			System.out.println( s );
 			switch( s ) {
 			case "X":
-				System.out.println( "Sudoku-X puzzle" );
+				props.setSudokuXGame( true );
 				break;
 			case "TEST":
-				System.out.println( "Product testing activated" );
+				props.setTestingMode( true );
 				break;
 			}
-				
 		}
+
+		GameCreator creator = GameCreatorFactory.getGameCreator();
+		GameBoard gameBoard = creator.createGame();
 	}
 
 }

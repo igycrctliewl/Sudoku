@@ -3,12 +3,15 @@ package com.mb.sudoku.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mb.sudoku.main.GameSettings;
+
 public class GameBoard {
 
 	private Cell[][] gridBoard;
 	private List<Group> rows;
 	private List<Group> columns;
 	private List<Group> sectors;
+	@Deprecated
 	private boolean sudokuXPuzzle;
 	private List<Group> diags;
 	private List<Group> groups;
@@ -43,7 +46,7 @@ public class GameBoard {
 		this.sectors = new ArrayList<>();
 		populateSectors();
 		this.diags = new ArrayList<>();
-		if( this.isSudokuXPuzzle() ) {
+		if( GameSettings.getProperties().isSudokuXGame() ) {
 			populateDiagonals();
 		}
 
@@ -136,10 +139,12 @@ public class GameBoard {
 		return new Group( cells );
 	}
 
+	@Deprecated
 	public void setSudokuXPuzzle( boolean newValue ) {
 		this.sudokuXPuzzle = newValue;
 	}
 
+	@Deprecated
 	public boolean isSudokuXPuzzle() {
 		return this.sudokuXPuzzle;
 	}
