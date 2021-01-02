@@ -11,8 +11,6 @@ public class GameBoard {
 	private List<Group> rows;
 	private List<Group> columns;
 	private List<Group> sectors;
-	@Deprecated
-	private boolean sudokuXPuzzle;
 	private List<Group> diags;
 	private List<Group> groups;
 	public List<Group> getGroups() {
@@ -39,6 +37,7 @@ public class GameBoard {
 	 */
 	public void initialize() {
 		// TODO: Consider whether this method should detect and populate any missing cells in the game board
+		// I think it should, just as a safety precaution to make sure the board is valid
 		this.rows = new ArrayList<>();
 		populateRows();
 		this.columns = new ArrayList<>();
@@ -137,16 +136,6 @@ public class GameBoard {
 			cells[ col ] = this.gridBoard[ row ][ col ];
 		}
 		return new Group( cells );
-	}
-
-	@Deprecated
-	public void setSudokuXPuzzle( boolean newValue ) {
-		this.sudokuXPuzzle = newValue;
-	}
-
-	@Deprecated
-	public boolean isSudokuXPuzzle() {
-		return this.sudokuXPuzzle;
 	}
 
 

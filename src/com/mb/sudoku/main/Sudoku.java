@@ -1,5 +1,6 @@
 package com.mb.sudoku.main;
 
+import com.mb.sudoku.engine.Solver;
 import com.mb.sudoku.main.creator.GameCreator;
 import com.mb.sudoku.main.creator.GameCreatorFactory;
 import com.mb.sudoku.model.GameBoard;
@@ -21,6 +22,16 @@ public class Sudoku {
 
 		GameCreator creator = GameCreatorFactory.getGameCreator();
 		GameBoard gameBoard = creator.createGame();
+
+		boolean engineWorking = true;
+		while( engineWorking ) {
+			engineWorking = Solver.runSolverEngine( gameBoard.getGroups() );
+			System.out.println( gameBoard );
+			System.out.println( "=========" );
+		}
+
+		System.out.println( gameBoard );
+
 	}
 
 }

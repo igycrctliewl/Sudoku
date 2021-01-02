@@ -2,6 +2,7 @@ package com.mb.sudoku.main.creator;
 
 import java.io.IOException;
 
+import com.mb.sudoku.main.GameSettings;
 import com.mb.sudoku.model.Cell;
 import com.mb.sudoku.model.GameBoard;
 
@@ -17,6 +18,7 @@ public class StdinGameCreator implements GameCreator {
 		byte[] bytes = new byte[9];
 		GameBoard board = new GameBoard();
 
+		System.out.printf( "Enter Sudoku%s puzzle one line at a time.%n", ( GameSettings.getProperties().isSudokuXGame() ? "-X" : "" ) );
 		int j = 0;
 		while( true ) {
 

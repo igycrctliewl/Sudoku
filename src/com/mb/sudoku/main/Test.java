@@ -3,17 +3,21 @@ package com.mb.sudoku.main;
 import com.mb.sudoku.engine.Solver;
 import com.mb.sudoku.model.Cell;
 import com.mb.sudoku.model.GameBoard;
-import com.mb.sudoku.model.Group;
 
-
+/**
+ * This was my original "main" test class but has been replaced by using the runtime TEST option instead
+ * @deprecated Please use TestGameCreator instead
+ * @author mikebro
+ *
+ */
+@Deprecated
 public class Test {
-	public static void main( String[] args) {
+	protected static void main( String[] args) {
+		GameSettings props = GameSettings.getProperties();
 		// legitimate Sudoku-X puzzle from SJ Mercury
-		// String testData = "7....234.....9..5.2...6.....29.....7...2.3...1.....68.....1...3.6..3.....754....9";
-		// dubious puzzle from ad on FB
-		String testData = "3.5.64.1979.51..8.2..3..7..57.4.9..6.4.276.38.6..5..4.63..2..7.15.847.62.........";
+		String testData = "7....234.....9..5.2...6.....29.....7...2.3...1.....68.....1...3.6..3.....754....9";
 		GameBoard board = new GameBoard();
-		board.setSudokuXPuzzle( false );
+		props.setSudokuXGame( true );
 
 		int j = 0;
 		for( int i = 0; i < 9; i++ ) {
