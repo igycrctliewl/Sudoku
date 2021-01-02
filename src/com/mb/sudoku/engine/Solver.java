@@ -58,14 +58,14 @@ public class Solver {
 			// Count the occurrences of charA in this Group
 			int count = 0;
 			for( Cell cell : group.getCells() ) {
-				if( ! cell.isSolved() && cell.contains( charA ) ) {
+				if( cell.contains( charA ) ) {
 					count++;
 					potential = cell;
 				}
 			}
 
 			// if there was only one occurrence, solve that cell for that value
-			if( count == 1 ) {
+			if( ! potential.isSolved() && count == 1 ) {
 				potential.setSolvedValue( charA );
 				result = true;
 			}

@@ -40,6 +40,9 @@ public class Cell {
 
 
 	public boolean contains( Character ch ) {
+		if( this.isSolved() ) {
+			return this.solvedValue.equals( ch );
+		}
 		return this.values.contains( ch );
 	}
 
@@ -77,8 +80,12 @@ public class Cell {
 	 * @param solvedValue the solved value for this Cell
 	 */
 	public void setSolvedValue( Character solvedValue ) {
-		this.values = null;
-		this.solvedValue = solvedValue;
+		if( this.isSolved() ) {
+			return;
+		} else {
+			this.values = null;
+			this.solvedValue = solvedValue;
+		}
 	}
 
 
@@ -104,7 +111,7 @@ public class Cell {
 
 
 
-	public static void main(String[] args) {
+	protected static void main(String[] args) {
 		System.out.println( "Cell.main()" );
 		Cell c = new Cell();
 		System.out.println( c.removeValue( '3' ) );

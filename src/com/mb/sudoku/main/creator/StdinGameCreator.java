@@ -5,17 +5,15 @@ import java.io.IOException;
 import com.mb.sudoku.model.Cell;
 import com.mb.sudoku.model.GameBoard;
 
-
+/**
+ * An implementation of GameCreator to allow the user to input a game from the console Stdin
+ * @author mikebro
+ *
+ */
 public class StdinGameCreator implements GameCreator {
 
 	@Override
 	public GameBoard createGame() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public static void main( String[] args) {
 		byte[] bytes = new byte[9];
 		GameBoard board = new GameBoard();
 
@@ -43,8 +41,7 @@ public class StdinGameCreator implements GameCreator {
 		}
 
 		board.initialize();
-		System.out.println( board );
-
+		return board;
 	}
 
 }
