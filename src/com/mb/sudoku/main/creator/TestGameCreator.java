@@ -9,7 +9,10 @@ public class TestGameCreator implements GameCreator {
 	// private static String testData = "7....234.....9..5.2...6.....29.....7...2.3...1.....68.....1...3.6..3.....754....9";
 
 	// Expert level puzzle from sudoku.com  --  excellent test case for patternMatcher algorithm
-	private static String testData = "4..5...9..1....8.7....9.........46.2132......7...........9...35....7....34..5.2.6";
+	// private static String testData = "4..5...9..1....8.7....9.........46.2132......7...........9...35....7....34..5.2.6";
+
+	// Expert level puzzle from newspaper that Mom solved after the program gave up
+	private static String testData = "1.84....69368125472.46...18895.246.1742.61.8.361.8....51..468.248325716962.1.8...";
 
 
 
